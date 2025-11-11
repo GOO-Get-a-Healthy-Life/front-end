@@ -11,6 +11,7 @@ import Stats from "./pages/Stats";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Cadastro from "./pages/Cadastro";
+import EditProfile from "./pages/EditProfile";
 
 export default function App() {
   return (
@@ -27,6 +28,7 @@ export default function App() {
             <Route path="habits" element={<Habits />} />
             <Route path="stats" element={<Stats />} />
             <Route path="profile" element={<Profile />} />
+            <Route path="/edit-profile" element={<EditProfile />} />
           </Route>
 
           {/* Rota padrão */}

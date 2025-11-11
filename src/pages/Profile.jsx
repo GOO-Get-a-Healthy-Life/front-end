@@ -1,54 +1,90 @@
-export default function Profile() {
-  const user = {
-    nome: "Gabriel Andrade",
-    nivel: 7,
-    pontos: 12202,
-  };
+import { useNavigate } from "react-router-dom";
+import { useApp } from "../context/AppContext"; // 🔹 importa o contexto global
 
-const conquistas = [
-  "Foco Total (7 dias seguidos)",
-  "100 dias de conquista",
-  "Em Ascensão",
-  "Autocuidado em Alta",
-  "Aprendiz Constante",
-  "Apaixonado por Movimento",
-];
+export default function Profile() {
+  const { user } = useApp(); // 🔹 pega os dados globais do usuário
+  const navigate = useNavigate();
+
+  const conquistas = [
+    { nome: "Foco Total", descricao: "7 dias seguidos", cor: "#4ade80" },
+    { nome: "100 Dias", descricao: "de conquista", cor: "#facc15" },
+    { nome: "Em Ascensão", descricao: "Progresso constante", cor: "#fb923c" },
+    { nome: "Autocuidado", descricao: "em Alta", cor: "#a78bfa" },
+    { nome: "Aprendiz", descricao: "Constante", cor: "#60a5fa" },
+    { nome: "Apaixonado", descricao: "por Movimento", cor: "#f472b6" },
+  ];
 
   return (
-    <div className="p-10 font-inter">
-      <h2 className="text-3xl font-semibold mb-8 text-center text-gray-800">
-        Meu Perfil
-      </h2>
+    <div className="p-10 font-inter bg-[#f5f5fa] min-h-screen">
+      {/* Card principal */}
+      <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-8 flex items-center justify-between mb-10">
+        {/* Avatar + Nome */}
+        <div className="flex items-center gap-6">
+          <div className="relative">
+            {user?.avatar ? (
+              <img
+                src={user.avatar}
+                alt={user.name}
+                className="w-24 h-24 rounded-full object-cover border-4 border-[#1800ad]"
+              />
+            ) : (
+              <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-[#1800ad] to-[#4b1bff] flex items-center justify-center text-3xl font-bold text-white">
+                {user?.name ? user.name[0] : "?"}
+              </div>
+            )}
+            <div className="absolute bottom-1 right-1 bg-white rounded-full p-1 shadow">
+              <div className="w-4 h-4 bg-[#1800ad] rounded-full" />
+            </div>
+          </div>
 
-      <div className="max-w-5xl mx-auto bg-white shadow-md rounded-2xl p-8 flex gap-10">
-        {/* Painel lateral do usuário */}
-        <div className="w-1/3 border-r border-gray-200 pr-8">
-          <div className="text-center">
-            <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4" />
-            <p className="font-semibold text-lg">{user.nome}</p>
-            <p className="text-gray-600">Nível: {user.nivel}</p>
-            <p className="mt-4 font-bold text-goo-blue text-xl">
-              {user.pontos.toLocaleString()} pontos
+          <div>
+            <h2 className="text-2xl font-semibold text-gray-800">
+              {user?.name || "Usuário"}
+            </h2>
+            <p className="text-gray-500 text-sm">
+              Membro desde {user?.membroDesde || "Janeiro 2024"}
             </p>
-            <button className="mt-6 bg-goo-blue text-white px-4 py-2 rounded-lg hover:bg-blue-600">
-              Editar Perfil
-            </button>
           </div>
         </div>
 
-        {/* Conquistas */}
-        <div className="flex-1">
-          <h3 className="text-xl font-semibold mb-4">Conquistas</h3>
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-            {conquistas.map((c) => (
-              <div
-                key={c}
-                className="bg-blue-50 border border-blue-200 text-blue-700 py-3 px-4 rounded-lg text-center font-medium"
-              >
-                {c}
-              </div>
-            ))}
+        {/* Nível e Pontos */}
+        <div className="text-right">
+          <p className="text-gray-800 font-semibold">
+            Nível {user?.level || 1}
+          </p>
+          <div className="w-40 bg-gray-200 h-2 rounded-full mt-1 mb-2">
+            <div
+              className="h-2 bg-[#1800ad] rounded-full"
+              style={{ width: `${(user?.progress || 60)}%` }}
+            />
           </div>
+          <p className="text-gray-600 text-sm">
+            {(user?.points || 0).toLocaleString()} pontos
+          </p>
+
+          <button
+            onClick={() => navigate("/edit-profile")}
+            className="mt-6 bg-[#1800ad] text-white px-4 py-2 rounded-lg hover:bg-[#0f008a] transition"
+          >
+            Editar Perfil
+          </button>
+        </div>
+      </div>
+
+      {/* Conquistas */}
+      <div className="max-w-5xl mx-auto bg-white shadow-lg rounded-2xl p-8">
+        <h3 className="text-xl font-semibold text-gray-800 mb-6">Conquistas</h3>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          {conquistas.map((c, i) => (
+            <div
+              key={i}
+              className="rounded-xl text-white p-4 font-medium shadow"
+              style={{ backgroundColor: c.cor }}
+            >
+              <p className="text-base">{c.nome}</p>
+              <p className="text-sm opacity-90">{c.descricao}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
