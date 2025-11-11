@@ -50,7 +50,7 @@ Certifique-se de ter instalado:
 git clone https://github.com/GOO-Get-a-Healthy-Life/front-end.git
 
 # Acesse a pasta
-cd front-end
+cd goo
 
 # Instale as dependências
 npm install
