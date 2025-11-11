@@ -1,0 +1,39 @@
+:root {
+  --primary: #dcdcdc;
+  --primary-dark: #1800ad;
+  --bg: #dcdcdc;
+  --text-dark: #222;
+  --text-light: #666;
+  --border: #ddd;
+  --radius: 10px;
+}
+
+body {
+  background-color: #dcdcdc;
+  font-family: 'Inter', sans-serif;
+}
+
+h1, h2, h3 {
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.btn {
+  background: var(--primary);
+  color: #fff;
+  padding: 0.6rem 1.5rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: var(--primary-dark);
+}
+
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}

@@ -1,0 +1,45 @@
+.habits-page {
+  background: var(--bg);
+  padding: 2rem;
+}
+
+.habits-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.habits-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.habit-item {
+  background: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.habit-item span {
+  font-weight: 500;
+}
+
+.habit-progress {
+  height: 6px;
+  border-radius: 10px;
+  background: #e0e0e0;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.habit-progress-fill {
+  height: 100%;
+  background: var(--primary);
+  width: 70%;
+}
