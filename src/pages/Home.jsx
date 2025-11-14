@@ -13,6 +13,27 @@ import DashboardCard from "../components/Dashboard/DashboardCard";
 export default function Home() {
   const { habits, user } = useApp();
 
+  // -----------------------------------------------------------------
+  // ⬇️ CORREÇÃO ADICIONADA AQUI ⬇️
+  // -----------------------------------------------------------------
+  // Verifica se 'user' ou 'habits' ainda são nulos (carregando).
+  // Se forem, exibe uma mensagem de "Carregando" em vez de quebrar a página.
+  if (!user || !habits) {
+    return (
+      <div className="flex items-center justify-center min-h-screen p-10">
+        <h2 className="text-2xl font-semibold text-gray-700">
+          Carregando seus dados...
+        </h2>
+      </div>
+    );
+  }
+  // -----------------------------------------------------------------
+  // ⬆️ FIM DA CORREÇÃO ⬆️
+  // -----------------------------------------------------------------
+
+  // Se o código chegou até aqui, 'user' e 'habits' existem.
+  // O resto do código agora é seguro.
+
   // Dados do gráfico de progresso
   const data = [
     { dia: "3/10", progresso: 10 },
@@ -45,7 +66,7 @@ export default function Home() {
 
   return (
     <div className="p-10 font-inter bg-[#f5f6fa] min-h-screen">
-      {/* Saudação */}
+      {/* Saudação (Agora é seguro) */}
       <div className="mb-10">
         <h2 className="text-3xl font-semibold text-gray-800">
           Olá, {user.name} 👋
@@ -55,7 +76,7 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Cards principais */}
+      {/* Cards principais (Agora é seguro) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <DashboardCard
           title="Hábitos Ativos"
